@@ -7,8 +7,8 @@ import java.awt.event.KeyEvent;
 /**
  * The <class>GameContainer</class> is the class that manages
  * all the programs. It mainly contains the code for the program loop
- * It is responsible for creating the window <class>Window</class>, creating the controller
- * the keyboard and mouse inputs <class>Input</class> and the object that handles
+ * It is responsible for create the window <class>Window</class>, create the input
+ * controller of keyboard and mouse <class>Input</class> and the object that handles
  * to draw on screen <class>Renderer</class>.
  *
  * This is copied from the 2D Java Game Engine from the channel Majoolwip
