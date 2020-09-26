@@ -2,7 +2,9 @@ package engine.gfx.images;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * This class represents an image
@@ -51,13 +53,28 @@ public class Image {
     /**
      * The constructor
      * A path is needed to build the image
+     *
+     * The image can be inside the resources folder of
+     * the project, or it can be in other folder outside
+     * of the project. But, when the image is outside
+     * of the project, the path needs to be absolute path
+     *
      * @param path is the absolute or relative path where is the image
      */
     public Image(String path) {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Image.class.getResourceAsStream(path));
+            InputStream inputStream = Image.class.getResourceAsStream(path);
+            if ( inputStream != null ) {
+                image = ImageIO.read(inputStream);
+            } else {
+                image = ImageIO.read(new File(path));
+            }
+        } catch ( NullPointerException e ) {
+            System.out.println("The path is null");
+            e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("The image could not be read");
             e.printStackTrace();
         }
         assert image != null;
