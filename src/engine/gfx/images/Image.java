@@ -63,25 +63,39 @@ public class Image {
      */
     public Image(String path) {
         BufferedImage image = null;
-        try {
-            InputStream inputStream = Image.class.getResourceAsStream(path);
-            if ( inputStream != null ) {
-                image = ImageIO.read(inputStream);
-            } else {
-                image = ImageIO.read(new File(path));
+
+        if ( path != null ) {
+
+            try {
+                InputStream inputStream = Image.class.getResourceAsStream(path);
+                if ( inputStream != null ) {
+                    image = ImageIO.read(inputStream);
+                } else {
+                    image = ImageIO.read(new File(path));
+                }
+            } catch ( NullPointerException e ) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("The image could not be read");
+                e.printStackTrace();
             }
-        } catch ( NullPointerException e ) {
-            System.out.println("The path is null");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("The image could not be read");
-            e.printStackTrace();
+
+            assert image != null;
+            w = image.getWidth();
+            h = image.getHeight();
+            p = image.getRGB(0, 0, w, h, null, 0, w);
+            image.flush();
+
+        } else {
+
+            w = 0;
+            h = 0;
+            p = new int[w * h];
+
+            System.out.println("The image path is null");
+
         }
-        assert image != null;
-        w = image.getWidth();
-        h = image.getHeight();
-        p = image.getRGB(0, 0, w, h, null, 0, w);
-        image.flush();
+
     }
 
     /**
