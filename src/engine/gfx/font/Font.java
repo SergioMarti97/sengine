@@ -17,11 +17,10 @@ import engine.gfx.images.Image;
  */
 public class Font {
 
-    public static final Font STANDARD = new Font("/fonts/consolas.png");
-
-    public static final Font STANDARD24 = new Font("/fonts/consolas24.png");
-
-    public static final Font COMICSANS = new Font("/fonts/comicsans.png");
+    /**
+     * The standard font. It is the Consolas font 24 size
+     */
+    public static final Font STANDARD = new Font("/consolas24.png");
 
     /**
      * The image which contains the sprites for the letters and symbols

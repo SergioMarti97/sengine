@@ -149,6 +149,7 @@ public class Image {
      */
     public int getPixel(int x, int y) throws ArrayIndexOutOfBoundsException {
         int index = x + w * y;
+        assert p != null;
         if ( index < p.length ) {
             return p[x + w * y];
         } else {
@@ -165,8 +166,8 @@ public class Image {
      */
     public int getSample(float x, float y) {
         int color;
-        int sampleX = Math.min((int)(x * (float)w), w -1);
-        int sampleY = Math.min((int)(y * (float)h), h -1);
+        int sampleX = Math.min((int)(x * (float)w), w > 0 ? w - 1 : w);
+        int sampleY = Math.min((int)(y * (float)h), h > 0 ? h - 1 : h);
         try {
             color = getPixel(sampleX, sampleY);
         } catch ( ArrayIndexOutOfBoundsException e ) {

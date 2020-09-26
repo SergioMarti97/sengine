@@ -45,7 +45,7 @@ public class Renderer {
     /**
      * The font for the text
      */
-    private Font font = Font.STANDARD24;
+    private Font font = Font.STANDARD;
 
     /**
      * This is an ArrayList for the request of the images
