@@ -15,9 +15,9 @@ import java.io.InputStream;
  * Youtube video where he explains the Renderer class: "2D Java Game Engine #6 : Drawing an Image"
  * https://www.youtube.com/watch?v=bNq1UxL2cmE&list=PL7dwpoQd3a8j6C9p5LqHzYFSkii6iWPZF&index=6
  *
- * @class: Image
- * @autor: Sergio Martí Torregrosa
- * @date: 2020-07-06
+ * @class Image
+ * @autor Sergio Martí Torregrosa
+ * @date 2020-07-06
  */
 public class Image {
 
@@ -192,6 +192,11 @@ public class Image {
 
     public void setAlpha(boolean alpha) {
         this.alpha = alpha;
+    }
+
+    @Override
+    public String toString() {
+        return "w: " + w + " h: " + h;
     }
 
 }
