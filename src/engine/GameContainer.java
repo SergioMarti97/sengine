@@ -31,7 +31,7 @@ public class GameContainer implements Runnable {
     /**
      * This is the name of the version
      */
-    private final String NAME_VERSION = "0.0.01";
+    private final String NAME_VERSION = "1";
 
     /**
      * The window of the program

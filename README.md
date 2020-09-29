@@ -1,6 +1,6 @@
 ## Game Engine by Sergio Martí Torregrosa
 <p>This is a project made by Sergio Martí Torregrosa. It pretends to be a simple 
-game engine to develop window applications, coded in Java.</p>
+game engine to develop window applications, coded in Java 12.</p>
 <p>Currently it uses the java.swing package, however in the future the project 
 is wanted to be able to use JavaFx also.</p>
 <p>The project has been made following the series "2D Java Game Engine" from

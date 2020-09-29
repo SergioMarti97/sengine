@@ -672,18 +672,46 @@ public class Renderer {
         }
     }
 
-    public void drawText(String text, int offX, int offY, int color) {
-        int offset = 0;
-        for ( int i = 0; i < text.length(); i++ ) {
-            int unicode = text.codePointAt(i);
-            for ( int y = 0; y < font.getFontImage().getH(); y++ ) {
-                for ( int x = 0; x < font.getWidths()[unicode]; x++ ) {
-                    if ( font.getFontImage().getP()[(x + font.getOffsets()[unicode]) + y * font.getFontImage().getW()] == 0xffffffff ) {
-                        setPixel(x + offset + offX, y + offY, color);
-                    }
+    private void drawCharacter(Image characterImage, int offX, int offY, int color) {
+        // Don't render code
+        if ( offX < -pW ) {
+            return;
+        }
+        if ( offY < -pH ) {
+            return;
+        }
+        if ( offX >= pW ) {
+            return;
+        }
+        if ( offY >= pH ) {
+            return;
+        }
+
+        int newX = 0;
+        int newY = 0;
+        int newWidth = characterImage.getW();
+        int newHeight = characterImage.getH();
+
+        // Clipping Code
+        if ( offX < 0 ) {
+            newX -= offX;
+        }
+        if ( offY < 0 ) {
+            newY -= offY;
+        }
+        if ( newWidth + offX >= pW ) {
+            newWidth -= (newWidth + offX - pW);
+        }
+        if ( newHeight + offY >= pH ) {
+            newHeight -= (newHeight + offY - pH);
+        }
+
+        for ( int y = newY; y < newHeight; y++ ) {
+            for (int x = newX; x < newWidth; x++) {
+                if (characterImage.getP()[x + y * characterImage.getW()] == 0xffffffff) {
+                    setPixel(x + offX, y + offY, color);
                 }
             }
-            offset += font.getWidths()[unicode];
         }
     }
 
@@ -691,15 +719,20 @@ public class Renderer {
         int offset = 0;
         for ( int i = 0; i < text.length(); i++ ) {
             int unicode = text.codePointAt(i);
-            for ( int y = 0; y < font.getFontImage().getH(); y++ ) {
+            /*for ( int y = 0; y < font.getFontImage().getH(); y++ ) {
                 for ( int x = 0; x < font.getWidths()[unicode]; x++ ) {
                     if ( font.getFontImage().getP()[(x + font.getOffsets()[unicode]) + y * font.getFontImage().getW()] == 0xffffffff ) {
                         setPixel(x + offset + offX, y + offY, color);
                     }
                 }
-            }
+            }*/
+            drawCharacter(font.getCharacterImage(unicode), offset + offX, offY, color);
             offset += font.getWidths()[unicode];
         }
+    }
+
+    public void drawText(String text, int offX, int offY, int color) {
+        drawText(text, offX, offY, color, font);
     }
 
     public int getZDepth() {

@@ -58,6 +58,16 @@ public class Font {
         }
     }
 
+    public Image getCharacterImage(int unicode) {
+        int[] characterImage = new int[widths[unicode] * fontImage.getH()];
+        for ( int y = 0; y < fontImage.getH(); y++ ) {
+            for ( int x = 0; x < widths[unicode]; x++ ) {
+                characterImage[x + y * widths[unicode]] = fontImage.getP()[(x + offsets[unicode]) + y * fontImage.getW()];
+            }
+        }
+        return new Image(characterImage, widths[unicode], fontImage.getH());
+    }
+
     public Image getFontImage() {
         return fontImage;
     }
