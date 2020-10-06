@@ -24,22 +24,22 @@ public class Image {
     /**
      * The image width
      */
-    private int w;
+    protected int w;
 
     /**
      * The image height
      */
-    private int h;
+    protected int h;
 
     /**
      * The image pixel array
      */
-    private int[] p;
+    protected int[] p;
 
     /**
      * If the image has alpha
      */
-    private boolean alpha = false;
+    protected boolean alpha = false;
 
     /**
      * The null constructor

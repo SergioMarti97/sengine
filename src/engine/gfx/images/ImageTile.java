@@ -31,6 +31,16 @@ public class ImageTile extends Image {
     private int tileH;
 
     /**
+     * The number of tiles what have the image sheet in x axis
+     */
+    private int numTilesX;
+
+    /**
+     * The number of tiles what have the image sheet in y axis
+     */
+    private int numTilesY;
+
+    /**
      * Constructor
      *
      * @param path It is the absolute or relative path from which the image is extracted
@@ -41,6 +51,8 @@ public class ImageTile extends Image {
         super(path);
         this.tileW = tileW;
         this.tileH = tileH;
+        numTilesX = w / tileW;
+        numTilesY = h / tileH;
     }
 
     /**
@@ -57,6 +69,8 @@ public class ImageTile extends Image {
         this.setW(image.getW());
         this.setH(image.getH());
         this.setP(image.getP());
+        numTilesX = w / tileW;
+        numTilesY = h / tileH;
     }
 
     /**
@@ -79,6 +93,29 @@ public class ImageTile extends Image {
             }
         }
         return new Image(p, tileW, tileH);
+    }
+
+    /**
+     * This method is as the method above, but
+     * instead of take as a parameter the x and y coordinates
+     * inside the image tile, it takes the correspondent
+     * index what have the tile inside the image tile
+     * (working as an one-dimension array)
+     * @param index the index of the tile inside the image tile
+     * @return return the image with the correspondent index
+     */
+    public Image getTileImage(int index) {
+        int x;
+        int y = 0;
+
+        while ( index >= numTilesX ) {
+            index -= numTilesX;
+            y++;
+        }
+
+        x = index;
+
+        return getTileImage(x, y);
     }
 
     public int getTileW() {

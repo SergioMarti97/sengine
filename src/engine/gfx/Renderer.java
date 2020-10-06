@@ -45,12 +45,12 @@ public class Renderer {
     /**
      * The font for the text
      */
-    private Font font = Font.STANDARD;
+    protected Font font = Font.STANDARD;
 
     /**
      * This is an ArrayList for the request of the images
      */
-    private ArrayList<ImageRequest> imageRequests = new ArrayList<>();
+    protected ArrayList<ImageRequest> imageRequests = new ArrayList<>();
 
     /**
      * The with
@@ -75,7 +75,7 @@ public class Renderer {
     /**
      * The depth in z axis of screen
      */
-    private int zDepth = 0;
+    protected int zDepth = 0;
 
     /**
      *
@@ -90,12 +90,12 @@ public class Renderer {
     /**
      * Processing flag for the image processing
      */
-    private boolean processing = false;
+    protected boolean processing = false;
 
     /**
      * The background color
      */
-    private int ambientColor = 0xffffffff;
+    protected int ambientColor = 0xffffffff;
 
     /**
      * Constructor
@@ -579,6 +579,9 @@ public class Renderer {
     }
 
     public void drawImage(Image image, int offX, int offY) {
+        if ( image == null ) {
+            return;
+        }
 
         if ( image.isAlpha() && !processing) {
             imageRequests.add(new ImageRequest(image, zDepth, offX, offY));
@@ -625,7 +628,66 @@ public class Renderer {
         }
     }
 
+    public void drawImage(Image image, int offX, int offY, int colorToChange, int newColor) {
+        if ( image == null ) {
+            return;
+        }
+
+        if ( image.isAlpha() && !processing) {
+            imageRequests.add(new ImageRequest(image, zDepth, offX, offY));
+            return;
+        }
+
+        // Don't render code
+        if ( offX < -pW ) {
+            return;
+        }
+        if ( offY < -pH ) {
+            return;
+        }
+        if ( offX >= pW ) {
+            return;
+        }
+        if ( offY >= pH ) {
+            return;
+        }
+
+        int newX = 0;
+        int newY = 0;
+        int newWidth = image.getW();
+        int newHeight = image.getH();
+
+        // Clipping Code
+        if ( offX < 0 ) {
+            newX -= offX;
+        }
+        if ( offY < 0 ) {
+            newY -= offY;
+        }
+        if ( newWidth + offX >= pW ) {
+            newWidth -= (newWidth + offX - pW);
+        }
+        if ( newHeight + offY >= pH ) {
+            newHeight -= (newHeight + offY - pH);
+        }
+
+        for ( int y = newY; y < newHeight; y++ ) {
+            for ( int x = newX; x < newWidth; x++ ) {
+                int pixelValue = image.getP()[x + y * image.getW()];
+                if ( pixelValue == colorToChange ) {
+                    setPixel(x + offX, y + offY, newColor);
+                } else {
+                    setPixel(x + offX, y + offY, pixelValue);
+                }
+            }
+        }
+    }
+
     public void drawImageTile(ImageTile image, int offX, int offY, int tileX, int tileY) {
+        if ( image == null ) {
+            return;
+        }
+
         if ( image.isAlpha() && !processing) {
             imageRequests.add(new ImageRequest(image.getTileImage(tileX, tileY), zDepth, offX, offY));
             return;
@@ -672,7 +734,10 @@ public class Renderer {
         }
     }
 
-    private void drawCharacter(Image characterImage, int offX, int offY, int color) {
+    public void drawCharacter(Image characterImage, int offX, int offY, int color) {
+        if ( characterImage == null ) {
+            return;
+        }
         // Don't render code
         if ( offX < -pW ) {
             return;
@@ -749,6 +814,26 @@ public class Renderer {
 
     public void setAmbientColor(int ambientColor) {
         this.ambientColor = ambientColor;
+    }
+
+    public Font getFont() {
+        return font;
+    }
+
+    public int[] getP() {
+        return p;
+    }
+
+    public int getpH() {
+        return pH;
+    }
+
+    public int getpW() {
+        return pW;
+    }
+
+    public int getzDepth() {
+        return zDepth;
     }
 
 }

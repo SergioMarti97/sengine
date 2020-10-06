@@ -39,6 +39,15 @@ public class Vec2dd implements Vec2d {
     }
 
     /**
+     * Copy constructor
+     * @param vec2dd the instance of the same object to copy the values
+     */
+    public Vec2dd(Vec2dd vec2dd) {
+        this.x = vec2dd.getX();
+        this.y = vec2dd.getY();
+    }
+
+    /**
      * This method add to the components the amount
      * pass as a parameter
      * @param amount the amount to add to both components

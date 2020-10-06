@@ -39,6 +39,15 @@ public class Vec2di implements Vec2d {
     }
 
     /**
+     * Copy constructor
+     * @param vec2di the instance of the same object to copy the values
+     */
+    public Vec2di(Vec2di vec2di) {
+        this.x = vec2di.getX();
+        this.y = vec2di.getY();
+    }
+
+    /**
      * This method add to the components the amount
      * pass as a parameter
      * @param amount the amount to add to both components
