@@ -26,88 +26,88 @@ public class GameContainer implements Runnable {
     /**
      * The needed constant for updating the screen
      */
-    private final double UPDATE_CAP = 1.0 / 60.0;
+    protected final double UPDATE_CAP = 1.0 / 60.0;
 
     /**
      * This is the name of the version
      */
-    private final String NAME_VERSION = "1";
+    protected final String NAME_VERSION = "1";
 
     /**
      * The window of the program
      */
-    private Window window;
+    protected Window window;
 
     /**
      * The renderer object which contains all drawing methods
      */
-    private Renderer renderer;
+    protected Renderer renderer;
 
     /**
      * The game what is managed by the GameContainer
      */
-    private AbstractGame game;
+    protected AbstractGame game;
 
     /**
      * The input class which manages the user input
      */
-    private Input input;
+    protected Input input;
 
     /**
      * The title of the program. It will be shown in the main bar of the
      * windows
      */
-    private String title;
+    protected String title;
 
     /**
      * The width of the screen. By default, 1080 pixels
      */
-    private int width = 1080;
+    protected int width = 1080;
 
     /**
      * The height of the screen. By default, 720 pixels
      */
-    private int height = 720;
+    protected int height = 720;
 
     /**
      * The scale of the pixels, by default this is one
      */
-    private float scale = 1.0f;
+    protected float scale = 1.0f;
 
     /**
      * The time spent in do the frame
      */
-    private double frameTime = 0;
+    protected double frameTime = 0;
 
     /**
      * The number of frames in each loop
      */
-    private int frames = 0;
+    protected int frames = 0;
 
     /**
      * The frames per second
      */
-    private int fps;
+    protected int fps;
 
     /**
      * The running flag, if the program is running
      */
-    private boolean running = false;
+    protected boolean running = false;
 
     /**
      * The flag for not overload a lot the CPU
      */
-    private boolean isCappedTo60fps = false;
+    protected boolean isCappedTo60fps = false;
 
     /**
      * Flag for show some information in screen (the fps)
      */
-    private boolean isShowingFpsInConsole = true;
+    protected boolean isShowingFpsInConsole = true;
 
     /**
      * Flag for show some information in screen (mouse position)
      */
-    private boolean isShowingInformation = false;
+    protected boolean isShowingInformation = false;
 
     /**
      * Constructor
@@ -121,7 +121,7 @@ public class GameContainer implements Runnable {
     /**
      * This method shows interesting information on the screen such as fps, or the position of the mouse on the screen
      */
-    private void showInformation() {
+    protected void showInformation() {
         renderer.drawText("FPS:" + fps, 0, 0, 0xffffffff );
         renderer.drawText("Mouse X: " + getInput().getMouseX() + " Y: " + getInput().getMouseY(), 0, 25, 0xffffffff);
     }
@@ -202,6 +202,7 @@ public class GameContainer implements Runnable {
                         System.out.println("FPS: " + fps);
                     }
                 }
+
             }
 
             if ( render ) {

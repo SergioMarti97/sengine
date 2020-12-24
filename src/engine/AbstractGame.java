@@ -68,4 +68,5 @@ public abstract class AbstractGame {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }

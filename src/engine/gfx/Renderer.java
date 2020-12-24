@@ -447,8 +447,7 @@ public class Renderer {
             return;
         }
 
-        while (y0 >= x0)
-        {
+        while (y0 >= x0) {
             // Modified to draw scan-lines instead of edges
             drawLineForFillCircle(x - x0, x + x0, y - y0, color);
             drawLineForFillCircle(x - y0, x + y0, y - x0, color);

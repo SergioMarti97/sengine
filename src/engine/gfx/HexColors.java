@@ -10,6 +10,17 @@ package engine.gfx;
  */
 public class HexColors {
 
+    private static int rnd(int max, int min) {
+        return (int)(Math.random() * (max - min + 1) + min);
+    }
+
+    public static int rndHexColor() {
+        int r = rnd(0xff, 0x00);
+        int g = rnd(0xff, 0x00);
+        int b = rnd(0xff, 0x00);
+        return (255 << 24 | r << 16 | g << 8 | b);
+    }
+
     public static final int WHITE = 0xffffffff;
 
     public static final int BLACK = 0xff000000;
