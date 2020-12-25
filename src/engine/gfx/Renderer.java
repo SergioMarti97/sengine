@@ -40,7 +40,7 @@ import java.util.Comparator;
  * @autor: Sergio Martí Torregrosa
  * @date: 2020-07-06
  */
-public class Renderer {
+public class Renderer implements Painter {
 
     /**
      * The font for the text

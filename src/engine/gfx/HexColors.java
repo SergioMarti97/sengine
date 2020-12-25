@@ -10,7 +10,7 @@ package engine.gfx;
  */
 public class HexColors {
 
-    private static int rnd(int max, int min) {
+    public static int rnd(int max, int min) {
         return (int)(Math.random() * (max - min + 1) + min);
     }
 

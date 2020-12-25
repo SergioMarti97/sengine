@@ -1,5 +1,6 @@
 package engine;
 
+import engine.gfx.Painter;
 import engine.gfx.Renderer;
 
 /**
@@ -50,9 +51,15 @@ public abstract class AbstractGame {
      * The method of drawing (rendering). This part of the code is where all the
      * graphics that the programs will show are drawn.
      * @param gc The <class>GameContainer</class> object that handles the <class>AbstractGame</class> program.
-     * @param r The <class>Render</class> object that contains all the rendering functions.
+     * @param p The <class>Painter</class> object which can be a Renderer, Renderer2D, Renderer3D or a PipeLine.
      */
-    public abstract void render(GameContainer gc, Renderer r);
+    public void render(GameContainer gc, Painter p) {
+
+    }
+
+    public void render(GameContainer gc, Renderer r) {
+
+    }
 
     /**
      * The getter for the <field>title</field>
